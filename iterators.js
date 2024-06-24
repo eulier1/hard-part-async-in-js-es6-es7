@@ -133,7 +133,8 @@ function setIterator(set) {
 // CHALLENGE 5
 
 /**
- * Create an iterator with a next method that returns each value of a set when .next is called 
+ * Build a function that walks through an array and returns the element concatenated with the string "was found after index x", where x is the previous index.
+   Note: if it is the first element it should say that it is the first 
  */
 
 function indexIterator(arr) {
@@ -157,8 +158,8 @@ function indexIterator(arr) {
  // CHALLENGE 6
 
 /**
- * Build a function that walks through an array and returns the element concatenated with the string "was found after index x", where x is the previous index.
-   Note: if it is the first element it should say that it is the first 
+ * Create an iterator that returns each word from a string of words on the call of its .next method (hint: use regex!)
+Then attach it as a method to the prototype of a constructor Words. Hint: research Symbol.iterator! 
  */
 
 function Words(string) {
@@ -167,18 +168,34 @@ function Words(string) {
 
 Words.prototype[Symbol.iterator] = function() {
   // YOUR CODE HERE
+  const words = this.str.split(/\s/)
+  let index = 0
+  
+  function next() {
+    const value = words[index]
 
+    if (index < words.length ){
+        index++
+    		return { value, done: false }
+   }
+    
+    return { done: true, value }
+  }
+  
+  return {
+			next
+  }
 }
 
 // Uncomment the lines below to test your work
-// const helloWorld = new Words('Hello World');
-// for (let word of helloWorld) { console.log(word); } // -> should log 'Hello' and 'World'
+const helloWorld = new Words('Hello World');
+for (let word of helloWorld) { console.log(word); } // -> should log 'Hello' and 'World'
 
 // CHALLENGE 7
 
 /**
  * Build a function that walks through an array and returns the element concatenated with the string "was found after index x", where x is the previous index.
-    Note: if it is the first element it should say that it is the first 
+Note: if it is the first element it should say that it is the first  
  */
 
 function valueAndPrevIndex(array){
@@ -194,8 +211,8 @@ console.log(returnedSentence.sentence());
 //CHALLENGE 8
 
 /**
- * Build a function that walks through an array and returns the element concatenated with the string "was found after index x", where x is the previous index.
-Note: if it is the first element it should say that it is the first 
+ * Write a function that will console.log "hello there", or "gibberish", every three seconds depending on if the word passed into the function is 'english'.
+Do not use any type of loop constructor and only make the call to createConversation once.  
  */
 
 function* createConversation(string) {
