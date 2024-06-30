@@ -6,7 +6,7 @@ function Words(str) {
   
 Words.prototype[Symbol.iterator] = function() {
    const words = this.str.split(/\s/)
-   const index = 0
+   let index = 0
    function next() {
      const value = words[index]
 
